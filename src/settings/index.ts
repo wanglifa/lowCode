@@ -1,3 +1,4 @@
+import { Input } from 'antd';
 export const elements = [
   {
     text: '输入框',
@@ -5,6 +6,7 @@ export const elements = [
     schema: {
       title: '输入框',
       type: 'string',
+      widget: Input,
     },
     setting: {
       props: {

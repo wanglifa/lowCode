@@ -1,6 +1,6 @@
 import React, { memo, FC } from 'react';
 
 const Setting: FC<any> = () => {
-  return <div>Setting</div>;
+  return <div className="setting-wrapper">Setting</div>;
 };
 export default memo(Setting);
