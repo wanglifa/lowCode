@@ -1,34 +1,8 @@
-import {
-  IColorConfigType,
-  INumberConfigType,
-  ISelectConfigType,
-  ITextConfigType,
-  TColorDefaultType,
-  TNumberDefaultType,
-  TSelectDefaultType,
-  TTextDefaultType,
-} from '@/components/FormComponents/types';
-
-export type TTextSelectKeyType = 'left' | 'right' | 'center';
-export type TTextEditData = Array<
-  | ITextConfigType
-  | IColorConfigType
-  | INumberConfigType
-  | ISelectConfigType<TTextSelectKeyType>
->;
-export interface ITextConfig {
-  text: TTextDefaultType;
-  color: TColorDefaultType;
-  fontSize: TNumberDefaultType;
-  align: TSelectDefaultType<TTextSelectKeyType>;
-  lineHeight: TNumberDefaultType;
-}
-
-export interface ITextSchema {
-  editData: TTextEditData;
-  config: ITextConfig;
-}
-const Text: ITextSchema = {
+const Text: any = {
+  template: {
+    h: 36,
+    displayName: '文本组件',
+  },
   editData: [
     {
       key: 'text',
@@ -67,7 +41,6 @@ const Text: ITextSchema = {
   ],
   config: {
     text: '我是文本',
-    color: 'rgba(60,60,60,1)',
     fontSize: 18,
     align: 'center',
     lineHeight: 2,

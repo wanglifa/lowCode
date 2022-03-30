@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
-import { ITextConfig } from './schema';
-const Text = memo((props: ITextConfig & { isTpl: boolean }) => {
+const Text = memo((props: any) => {
   const { align, text, fontSize, color, lineHeight, isTpl } = props;
   return (
     <>
