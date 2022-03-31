@@ -9,20 +9,24 @@ import React, {
 import Context from '@/utils/context';
 import ComponetRender from '@/components/renderer/ComponentRender';
 const Canvas: FC<any> = () => {
-  const [compon, setCompon] = useState<any>({});
-  const { nodeLists, setNodeLists } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
   const dropRef = useRef(null);
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    const currentNode = JSON.parse(event.dataTransfer.getData('nodeData'));
     event.preventDefault();
-    setNodeLists([JSON.parse(event.dataTransfer.getData('nodeData'))]);
+    dispatch({
+      type: 'setNodeLists',
+      nodeLists: state.nodeLists.concat(currentNode),
+    });
+    dispatch({
+      type: 'setCurrentNode',
+      currentNode: currentNode,
+    });
   };
   const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   };
-  useEffect(() => {
-    console.log(nodeLists, 'nnnnnnn');
-  }, [nodeLists]);
   return (
     <div
       className="canvas-wrapper"
@@ -30,8 +34,8 @@ const Canvas: FC<any> = () => {
       onDrop={onDrop}
       onDragOver={onDragOver}
     >
-      {nodeLists.map((nodeList) => (
-        <ComponetRender {...nodeList} />
+      {state.nodeLists.map((nodeList, index) => (
+        <ComponetRender {...nodeList} key={index} />
       ))}
     </div>
   );

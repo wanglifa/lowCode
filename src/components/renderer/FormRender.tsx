@@ -67,10 +67,7 @@ const BaseForm: any = {
 //   });
 // };
 const FormRender: FC<any> = (props) => {
-  const { config, editData, onSave } = props;
-  const onFinish = (values: any) => {
-    onSave && onSave(values);
-  };
+  const { config, editData } = props;
 
   const [form] = Form.useForm();
 
@@ -78,20 +75,14 @@ const FormRender: FC<any> = (props) => {
     return () => {
       form.resetFields();
     };
-  }, [uid, form]);
-
-  const handlechange = () => {
-    onFinish(form.getFieldsValue());
-  };
+  }, [form]);
 
   return (
     <Form
       form={form}
       name={`form_editor`}
       {...formItemLayout}
-      onFinish={onFinish}
       initialValues={config}
-      onValuesChange={handlechange}
     >
       {editData.map((item) => {
         const Component = BaseForm[item.type];
