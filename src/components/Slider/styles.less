@@ -1,0 +1,38 @@
+@mainColor: #4569d4;
+.slider-wrapper {
+  padding: 8px;
+  .slider-list-wrapper {
+    .title {
+      font-size: 16px;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      .slider-list {
+        width: calc(50% - 4px);
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 12px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        user-select: none;
+        cursor: move;
+        &:nth-child(odd) {
+          margin-right: 4px;
+        }
+        &:nth-child(even) {
+          margin-left: 4px;
+        }
+        &:hover {
+          border-color: @mainColor;
+          color: @mainColor;
+        }
+      }
+    }
+  }
+}

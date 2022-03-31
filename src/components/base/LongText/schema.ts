@@ -1,6 +1,7 @@
 export type TLongTextSelectKeyType = 'left' | 'center' | 'right';
 const LongText: any = {
   template: {
+    type: 'LongText',
     h: 36,
     displayName: '长文本组件',
   },

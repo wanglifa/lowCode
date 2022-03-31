@@ -7,23 +7,24 @@ export type componentsType = 'media' | 'base' | 'visible';
 const DynamicFunc = (type: string) => {
   return dynamic({
     loader: async function () {
-      const { default: Graph } = await import(`@/components/base/${type}`);
+      console.log(type, 'tttt');
+      const { default: Graph } = await import(
+        /* webpackChunkName: "external_A" */ `@/components/base/${type}`
+      );
+      console.log(Graph, 'GraphGraphGraph');
       const Component = Graph;
       return (props: any) => {
-        const { config, isTpl } = props;
-        return <Component {...config} isTpl={isTpl} />;
+        const { config } = props;
+        return <Component {...config} />;
       };
     },
-    loading: () => (
-      <div style={{ paddingTop: 10, textAlign: 'center' }}>loading</div>
-    ),
   });
 };
 
 const DynamicEngine = memo((props: any) => {
-  const { type, config } = props;
+  const { template, config } = props;
   const Dynamic = useMemo(() => {
-    return DynamicFunc(type);
+    return DynamicFunc(template.type);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config]);
 

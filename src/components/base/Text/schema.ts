@@ -1,5 +1,6 @@
 const Text: any = {
   template: {
+    type: 'Text',
     h: 36,
     displayName: '文本组件',
   },
