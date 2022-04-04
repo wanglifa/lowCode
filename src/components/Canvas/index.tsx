@@ -12,7 +12,10 @@ const Canvas: FC<any> = () => {
   const { state, dispatch } = useContext(Context);
   const dropRef = useRef(null);
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    const currentNode = JSON.parse(event.dataTransfer.getData('nodeData'));
+    const currentNode = {
+      ...JSON.parse(event.dataTransfer.getData('nodeData')),
+      nodeIndex: state.nodeLists.length,
+    };
     event.preventDefault();
     dispatch({
       type: 'setNodeLists',
@@ -20,7 +23,7 @@ const Canvas: FC<any> = () => {
     });
     dispatch({
       type: 'setCurrentNode',
-      currentNode: currentNode,
+      currentNode,
     });
   };
   const onDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -35,7 +38,7 @@ const Canvas: FC<any> = () => {
       onDragOver={onDragOver}
     >
       {state.nodeLists.map((nodeList, index) => (
-        <ComponetRender {...nodeList} key={index} />
+        <ComponetRender index={index} {...nodeList} key={index} />
       ))}
     </div>
   );

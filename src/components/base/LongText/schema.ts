@@ -19,7 +19,7 @@ const LongText: any = {
     {
       key: 'textAlign',
       name: '对齐方式',
-      type: 'Select',
+      type: 'Select2',
       range: [
         {
           key: 'left',

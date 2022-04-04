@@ -1,5 +1,6 @@
-import React, { memo, FC, useEffect, useMemo } from 'react';
+import React, { memo, FC, useEffect, useContext, useRef } from 'react';
 import { Input, Select, Form, InputNumber } from 'antd';
+import Context from '@/utils/context';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -9,7 +10,7 @@ const formItemLayout = {
 };
 const BaseForm: any = {
   Text: (props) => {
-    const { item, config } = props;
+    const { item } = props;
     return (
       <Form.Item label={item.name} name={item.key}>
         <Input />
@@ -32,7 +33,7 @@ const BaseForm: any = {
       </Form.Item>
     );
   },
-  Select: (props) => {
+  Select2: (props) => {
     const { item } = props;
     return (
       <Form.Item label={item.name} name={item.key}>
@@ -67,15 +68,22 @@ const BaseForm: any = {
 //   });
 // };
 const FormRender: FC<any> = (props) => {
-  const { config, editData } = props;
-
+  const { config, editData, nodeIndex } = props;
+  const { state, dispatch } = useContext(Context);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    return () => {
-      form.resetFields();
-    };
-  }, [form]);
+    form.resetFields();
+  }, [form, nodeIndex]);
+
+  const onChange = (changedValues, values) => {
+    const copyNodeLists = [...state.nodeLists];
+    copyNodeLists[nodeIndex].config = values;
+    dispatch({
+      type: 'setNodeLists',
+      nodeLists: copyNodeLists,
+    });
+  };
 
   return (
     <Form
@@ -83,10 +91,14 @@ const FormRender: FC<any> = (props) => {
       name={`form_editor`}
       {...formItemLayout}
       initialValues={config}
+      className="form-render"
+      onValuesChange={onChange}
     >
-      {editData.map((item) => {
+      {editData.map((item, index) => {
         const Component = BaseForm[item.type];
-        return <Component item={item} />;
+        console.log(item, 'itemssss');
+        console.log(Component, 'componetn');
+        return <Component item={item} key={index} />;
       })}
     </Form>
   );
