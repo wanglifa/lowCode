@@ -22,7 +22,7 @@ const DynamicFunc = (type: string) => {
 };
 
 const DynamicEngine = memo((props: any) => {
-  const { template, config } = props;
+  const { template, config, index } = props;
   const Dynamic = useMemo(() => {
     return DynamicFunc(template.type);
     // eslint-disable-next-line react-hooks/exhaustive-deps
