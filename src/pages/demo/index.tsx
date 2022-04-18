@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import List from './components/List';
 import Context from './Context';
-import './style.less';
 const Demo = () => {
   const [lists, setLists] = useState([]);
   const [dragingNode, setDragingNode] = useState({});
