@@ -7,7 +7,6 @@ export type componentsType = 'media' | 'base' | 'visible';
 const DynamicFunc = (type: string) => {
   return dynamic({
     loader: async function () {
-      console.log(type, 'tttt');
       const { default: Graph } = await import(
         /* webpackChunkName: "external_A" */ `@/components/base/${type}`
       );

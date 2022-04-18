@@ -78,7 +78,11 @@ const FormRender: FC<any> = (props) => {
 
   const onChange = (changedValues, values) => {
     const copyNodeLists = [...state.nodeLists];
-    copyNodeLists[nodeIndex].config = values;
+    copyNodeLists.forEach((list) => {
+      if (list.nodeIndex === nodeIndex) {
+        list.config = values;
+      }
+    });
     dispatch({
       type: 'setNodeLists',
       nodeLists: copyNodeLists,

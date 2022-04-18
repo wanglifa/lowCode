@@ -4,7 +4,6 @@ import './styles.less';
 const Slider: FC<any> = () => {
   const onDragStart = useCallback(
     (event: React.DragEvent<HTMLDivElement>, data: any) => {
-      console.log(data, 'dataaaaa');
       event.dataTransfer.setData('nodeData', JSON.stringify(data));
       event.dataTransfer.dropEffect = 'move';
     },

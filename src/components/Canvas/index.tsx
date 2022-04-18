@@ -29,7 +29,6 @@ const Canvas: FC<any> = () => {
       sortDropIndexRef.current = state.nodeLists.length;
     }
     if (event.dataTransfer.getData('nodeData')) {
-      console.log(sortDropIndexRef, 'hhhhdddd');
       const currentNode = {
         ...JSON.parse(event.dataTransfer.getData('nodeData')),
         nodeIndex: state.nodeLists.length,
@@ -93,7 +92,6 @@ const Canvas: FC<any> = () => {
     }
   };
   const handleDragEnd = () => {
-    console.log('end');
     dragIndexRef.current = -1;
     setTimeout(() => {
       setDraging(false);
@@ -101,7 +99,6 @@ const Canvas: FC<any> = () => {
   };
   const getStyle: any = useCallback(
     (index) => {
-      console.log(dropIndexRef.current, index, 'iiiii');
       if (isOver && index === dropIndexRef.current) {
         return isOver === 'up'
           ? {
