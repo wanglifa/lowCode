@@ -10,7 +10,6 @@ const style = {
 const List = ({ name, index, onChange, key, maxLength }) => {
   const { dragingNode, setDragingNode, dropNodeIndex, setDropNodeIndex } =
     useContext(Context);
-  const [highlightIndex, setHighlightIndex] = useState(0);
   const [draging, setDraging] = useState(false);
   const [isOver, setIsOver] = useState<'up' | 'down' | ''>('');
   const handleDragStart = (event, index) => {
@@ -19,8 +18,8 @@ const List = ({ name, index, onChange, key, maxLength }) => {
     setDragingNode({
       index,
       node: event.target,
-      startPostion: event.clientY,
     });
+    // 这里如果不用 setTImeout 就会一拖动目标拖动中的和原位置的元素都会消失
     setTimeout(() => {
       setDraging(true);
     }, 0);
@@ -31,16 +30,8 @@ const List = ({ name, index, onChange, key, maxLength }) => {
       setDraging(false);
     }, 0);
   };
-  const handleDragEnter = (event, index) => {
-    event.preventDefault();
-    setHighlightIndex(index);
-    // setIsOver(true);
-  };
   const handleDragLeave = (event) => {
     setIsOver('');
-    console.log(event.target, 'ffffii');
-    console.log('leave------------------');
-    // setHighlightIndex(0);
   };
   const handleDragOver = (event, index) => {
     // console.log(event.clientY, 'over')
@@ -53,23 +44,18 @@ const List = ({ name, index, onChange, key, maxLength }) => {
     const hoverClientY = event.clientY - hoverBoundingRect.top;
     // console.log(hoverClientY, 'hoverClientY')
     event.dataTransfer.dropEffect = 'move';
-    console.log(hoverBoundingRect.top, 'hoverBoundingRect.top');
     if (hoverClientY <= hoverMiddleY) {
       setIsOver('up');
-      console.log('up');
       setDropNodeIndex(index);
     }
     if (hoverClientY > hoverMiddleY) {
       setIsOver('down');
       setDropNodeIndex(index + 1);
-      console.log('down');
     }
     // hoverIndex = index;
   };
   const handleDrop = (event, index) => {
     setIsOver('');
-    console.log(dropNodeIndex, 'drop');
-    console.log(dragingNode.index, 'iiii');
     onChange(dragingNode.index, dropNodeIndex);
     // setHighlightIndex(0);
     // onChange(dragingIndex, index);
