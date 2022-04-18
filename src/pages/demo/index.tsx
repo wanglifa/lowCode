@@ -41,35 +41,11 @@ const Demo = () => {
     [lists],
   );
 
-  const handleDragStart = (event) => {
-    console.log(event.target.dataset.index, 'target');
-  };
-
-  const handleDragOver = (event) => {
-    event.preventDefault();
-    // console.log(event.target, 'over')
-  };
-
-  const handleDragEnter = (event) => {
-    event.preventDefault();
-    console.log(event.target, 'enter');
-  };
-
-  const handleDragLeave = () => {
-    console.log('leavel');
-  };
-
   return (
     <Context.Provider
       value={{ dragingNode, setDragingNode, dropNodeIndex, setDropNodeIndex }}
     >
-      <div
-        className="demo"
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-      >
+      <div className="demo">
         {lists.map((list, index) => (
           <List
             index={index}
