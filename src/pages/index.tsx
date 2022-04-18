@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useState } from 'react';
+import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Slider from '@/components/Slider';
 import Canvas from '@/components/Canvas';

@@ -96,8 +96,6 @@ const FormRender: FC<any> = (props) => {
     >
       {editData.map((item, index) => {
         const Component = BaseForm[item.type];
-        console.log(item, 'itemssss');
-        console.log(Component, 'componetn');
         return <Component item={item} key={index} />;
       })}
     </Form>

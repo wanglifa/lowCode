@@ -13,6 +13,7 @@ const LongText = memo((props: ILongTextConfig & { isTpl: boolean }) => {
     padding,
     radius,
     isTpl,
+    index,
   } = props;
   return (
     <>
@@ -27,6 +28,7 @@ const LongText = memo((props: ILongTextConfig & { isTpl: boolean }) => {
           padding,
           borderRadius: radius,
         }}
+        data-index={index}
       >
         {text}
       </div>
